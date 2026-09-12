@@ -21,6 +21,11 @@ jobs:
           distribution: temurin
           java-version: "17"
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.7"
+
       - name: Unpack SahilNow project
         run: |
           rm -rf sahilnow-project
@@ -33,13 +38,10 @@ jobs:
           echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
           echo "Found project at: $PROJECT_DIR"
 
-      - name: Make Gradle executable
-        run: chmod +x "$PROJECT_DIR/gradlew"
-
       - name: Build debug APK
         run: |
           cd "$PROJECT_DIR"
-          ./gradlew assembleDebug
+          gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
