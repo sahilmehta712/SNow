@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "SnowEdge-Consultancy-v0.4.1.zip"
+      - "SnowEdge-Consultancy-v0.4.2.zip"
       - ".github/workflows/build-snowedge.yml"
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
         run: |
           rm -rf snowedge-project
           mkdir snowedge-project
-          unzip -q "SnowEdge-Consultancy-v0.4.1.zip" -d snowedge-project
+          unzip -q "SnowEdge-Consultancy-v0.4.2.zip" -d snowedge-project
 
           PROJECT_DIR=$(dirname "$(find "$GITHUB_WORKSPACE/snowedge-project" -name settings.gradle -print -quit)")
 
@@ -47,6 +47,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: SnowEdge-Consultancy-v0.4.1-APK
+          name: SnowEdge-Consultancy-v0.4.2-APK
           path: "**/build/outputs/apk/debug/*.apk"
           if-no-files-found: error
